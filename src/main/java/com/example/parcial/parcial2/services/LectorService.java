@@ -2,6 +2,7 @@ package com.example.parcial.parcial2.services;
 
 import com.example.parcial.parcial2.domain.dtos.LectorRequestDto;
 import com.example.parcial.parcial2.domain.entities.Lector;
+import com.example.parcial.parcial2.exception.ResourceNotFoundException;
 import com.example.parcial.parcial2.repositories.LectorRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,23 +28,27 @@ public class LectorService {
         return lectorRepository.save(lector);
     }
 
+    public List<Lector> getAllLectors() {
+        return lectorRepository.findAll();
+    }
+
     public Lector getLectorById(UUID id) {
         return lectorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Lector not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Lector not found"));
     }
 
     public Lector updateLector(UUID id, LectorRequestDto dto) {
         Lector lector = lectorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Lector not found"));
-        lector.setName(dto.getName());
-        lector.setLastname(dto.getLastname());
+                .orElseThrow(() -> new ResourceNotFoundException("Lector not found"));
+        lector.setName(dto.getName().toLowerCase());
+        lector.setLastname(dto.getLastname().toLowerCase());
         lector.setDui(dto.getDui());
         return lectorRepository.save(lector);
     }
 
     public void deleteLector(UUID id) {
         Lector lector = lectorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Lector not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Lector not found"));
         lector.setActive(false);
         lectorRepository.save(lector);
     }

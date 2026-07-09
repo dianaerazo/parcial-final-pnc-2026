@@ -25,6 +25,11 @@ public class LectorController {
         return ResponseEntity.ok(lectorService.registerLector(dto));
     }
 
+    @GetMapping
+    public ResponseEntity<List<Lector>> getAllLectors() {
+        return ResponseEntity.ok(lectorService.getAllLectors());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Lector> getLectorById(@PathVariable UUID id) {
         return ResponseEntity.ok(lectorService.getLectorById(id));

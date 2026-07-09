@@ -1,4 +1,4 @@
-# [Nombre] [Carné]
+# Diana Alejandra Erazo Pérez [00149823]
 
 ## Indicaciones
 
