@@ -55,7 +55,7 @@ public class MovementService {
             }
         } else {
             // Verificamos que exista un préstamo activo (sin devolver) de este
-            // libro por este lector antes de aceptar la devolución.
+            // libro por este lector antes de aceptar que haga la devolución
             Optional<Movement> lastMovement =
                     movementRepository.findTopByLectorAndBookOrderByTimestampDesc(lector, book);
 
@@ -72,7 +72,7 @@ public class MovementService {
         Movement movement = new Movement();
         movement.setLector(lector);
         movement.setBook(book);
-        movement.setTimestamp(Instant.now());
+    movement.setTimestamp(Instant.now());
         movement.setType(type);
 
         return movementRepository.save(movement);
